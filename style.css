@@ -1,0 +1,31 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    background-color: black;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+#game {
+    position: relative;
+    width: 800px;
+    height: 600px;
+    margin: 0 auto;
+    border: 1px solid white;
+}
+.player, .invader, .bullet {
+    position: absolute;
+    background-color: white;
+}
+.player {
+    width: 50px;
+    height: 30px;
+    bottom: 20px;
+}
+.invader {
+    width: 40px;
+    height: 30px;
+}
+.bullet {
+    width: 5px;
+    height: 10px;
+}
