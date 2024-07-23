@@ -1,5 +1,7 @@
 import { game, enemyMap } from '../game.js';
 
+
+
 const enemyWidth = 40;
 const enemyHeight = 30;
 const enemyGap = 10;

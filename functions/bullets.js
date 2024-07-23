@@ -1,5 +1,8 @@
 import { game } from '../game.js';
 import { playerX } from './players.js';
+import { increaseScore } from './score.js';
+import { decreaseLives } from './lives.js';
+
 
 export function createBullet() {
     const bullet = document.createElement('div');
@@ -28,7 +31,19 @@ function checkBulletCollision(bullet) {
         if (isColliding(bullet, enemy)) {
             bullet.remove();
             enemy.remove();
-            // Increase score here
+            increaseScore(10); // Increase score by 10 for each enemy destroyed
+        }
+    });
+}
+
+export function checkPlayerCollision() {
+    const enemies = document.querySelectorAll('.invader');
+    const playerElement = document.getElementById('player');
+
+    enemies.forEach(enemy => {
+        if (isColliding(playerElement, enemy)) {
+            decreaseLives();
+            enemy.remove();
         }
     });
 }
@@ -43,3 +58,5 @@ function isColliding(a, b) {
         aRect.left > bRect.left + bRect.width
     );
 }
+
+
