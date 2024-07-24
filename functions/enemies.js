@@ -63,3 +63,24 @@ export function moveEnemies(deltaTime) {
         }
     });
 }
+
+export function enemyShoot() {
+    const enemies = document.querySelectorAll('.invader');
+    enemies.forEach(enemy => {
+        if (Math.random() < 0.0005) { // Adjust this value to control frequency
+            createEnemyBullet(enemy);
+        }
+    });
+}
+
+function createEnemyBullet(enemy) {
+    const bullet = document.createElement('div');
+    bullet.classList.add('enemy-bullet');
+    const enemyRect = enemy.getBoundingClientRect();
+    bullet.style.left = `${enemyRect.left + enemyRect.width / 2 - 2}px`;
+    bullet.style.top = '0px';
+    game.appendChild(bullet);
+}
+
+
+

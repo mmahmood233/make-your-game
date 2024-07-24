@@ -1,10 +1,10 @@
 import { game, gameLoopId } from '../game.js';
 
-let timeRemaining = 60; 
+let timeRemaining = 120; 
 export let timerInterval;
 
 export function initializeTimer() {
-    timeRemaining = 60;
+    timeRemaining = 120;
     updateTimerDisplay();
     timerInterval = setInterval(updateTimer, 1000); // Update timer every second
 }
@@ -16,6 +16,14 @@ function updateTimer() {
         clearInterval(timerInterval); // Stop the timer
         gameOver();
     }
+}
+
+export function pauseTimer() {
+    clearInterval(timerInterval);
+}
+
+export function resumeTimer() {
+    timerInterval = setInterval(updateTimer, 1000);
 }
 
 function updateTimerDisplay() {

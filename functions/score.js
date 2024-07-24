@@ -13,7 +13,8 @@ export function getScore() {
 }
 
 export function checkWinCondition() {
-    if (score >= 600) {
+    const remainingEnemies = document.querySelectorAll('.invader');
+    if (remainingEnemies.length === 0) {
         clearInterval(timerInterval);
         showWinScreen();
     }

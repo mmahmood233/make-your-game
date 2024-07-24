@@ -9,14 +9,22 @@ export function initializeLives() {
     updateLivesDisplay();
 }
 
-export function decreaseLives() {
+export function decreaseLives(resetEnemies = true) {
     lives--; // Decrease the number of lives
     updateLivesDisplay(); // Update the lives display
     if (lives <= 0) {
         clearInterval(timerInterval);
         gameOver();
     } else {
-        restartGame();
+        // Play player dead sound
+        const playerIsDeadSound = new Audio('/playerKilled.wav');
+        playerIsDeadSound.currentTime = 0;
+        playerIsDeadSound.play().catch(error => console.log('Error playing player dead sound:', error));
+        
+        // Reset enemies only if needed
+        if (resetEnemies) {
+            restartGame();
+        }
     }
 }
 
@@ -68,4 +76,3 @@ function updateLivesDisplay() {
     }
     livesElement.textContent = `Lives: ${lives}`; // Update the lives display
 }
-

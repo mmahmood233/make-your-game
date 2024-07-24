@@ -1,11 +1,10 @@
 import { updatePlayerPosition } from './functions/players.js';
-import { createEnemies, moveEnemies } from './functions/enemies.js';
+import { createEnemies, moveEnemies, enemyShoot } from './functions/enemies.js';
 import { moveBullets, checkPlayerCollision } from './functions/bullets.js';
 import { initializeScore, checkWinCondition } from './functions/score.js';
 import { initializeLives } from './functions/lives.js';
-import { initializeTimer } from './functions/timer.js';
+import { initializeTimer, pauseTimer, resumeTimer } from './functions/timer.js';
 import { initializePlayerPosition } from './functions/players.js';
-
 
 
 
@@ -39,6 +38,7 @@ function gameLoop(currentTime) {
         const deltaTime = currentTime - lastTime;
         updatePlayerPosition();
         moveEnemies(deltaTime);
+        enemyShoot();
         moveBullets();
         checkPlayerCollision();
         checkWinCondition();
@@ -64,9 +64,11 @@ function togglePause() {
     isPaused = !isPaused;
     if (isPaused) {
         showPauseMenu();
+        pauseTimer();
     } else {
         hidePauseMenu();
         lastTime = performance.now(); // Reset lastTime when unpausing
+        resumeTimer();
     }
 }
 

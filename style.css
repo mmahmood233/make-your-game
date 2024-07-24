@@ -69,6 +69,7 @@ body {
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
+    transform: translateZ(0);
 }
 
 
@@ -134,4 +135,14 @@ body {
     background-size: 100% 2px, 3px 100%;
     pointer-events: none;
 }
+
+.enemy-bullet {
+    position: absolute;
+    width: 4px;
+    height: 10px;
+    background-color: red;
+}
+
+
+
 
