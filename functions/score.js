@@ -1,5 +1,5 @@
-import { game } from '../game.js';
-import { timerInterval } from './timer.js';
+import { game, freezeGame } from '../game.js';
+import { timerInterval, pauseTimer } from './timer.js';
 
 let score = 0;
 
@@ -41,16 +41,8 @@ export function initializeScore() {
 }
 
 function showWinScreen() {
-    const winElement = document.createElement('div');
-    winElement.id = 'win-screen';
-    winElement.textContent = 'You Won!';
-    winElement.style.position = 'absolute';
-    winElement.style.top = '50%';
-    winElement.style.left = '50%';
-    winElement.style.transform = 'translate(-50%, -50%)';
-    winElement.style.fontSize = '48px';
-    winElement.style.color = 'green';
-    game.appendChild(winElement);
-
-    cancelAnimationFrame(gameLoopId); 
+    const winMenu = document.getElementById('win-menu');
+    winMenu.style.display = 'block';
+    freezeGame();
+    pauseTimer();
 }

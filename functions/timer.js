@@ -1,4 +1,4 @@
-import { game, gameLoopId } from '../game.js';
+import { game, freezeGame } from '../game.js';
 
 let timeRemaining = 120; 
 export let timerInterval;
@@ -19,11 +19,11 @@ function updateTimer() {
 }
 
 export function pauseTimer() {
-    clearInterval(timerInterval);
+    clearInterval(timerInterval); // Stop the timer
 }
 
 export function resumeTimer() {
-    timerInterval = setInterval(updateTimer, 1000);
+    timerInterval = setInterval(updateTimer, 1000); // Resume the timer
 }
 
 function updateTimerDisplay() {
@@ -43,19 +43,8 @@ function updateTimerDisplay() {
 }
 
 function gameOver() {
-    console.log('Game Over');
-    // Create and display a game over screen
-    const gameOverElement = document.createElement('div');
-    gameOverElement.id = 'game-over';
-    gameOverElement.textContent = 'Time\'s Up';
-    gameOverElement.style.position = 'absolute';
-    gameOverElement.style.top = '50%';
-    gameOverElement.style.left = '50%';
-    gameOverElement.style.transform = 'translate(-50%, -50%)';
-    gameOverElement.style.fontSize = '48px';
-    gameOverElement.style.color = 'red';
-    game.appendChild(gameOverElement);
-
-    // Stop the game loop
-    cancelAnimationFrame(gameLoopId);
+    const timeMenu = document.getElementById('time-menu');
+    timeMenu.style.display = 'block';
+    freezeGame();
+    pauseTimer();
 }

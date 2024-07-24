@@ -108,6 +108,11 @@ body {
     text-align: center;
 }
 
+#pause-menu h1 {
+    margin: 0 0 20px 0;
+    font-size: 48px;
+}
+
 #pause-menu button {
     margin: 10px;
     padding: 10px 20px;
@@ -139,6 +144,94 @@ body {
     height: 15px;
     background-color: red;
 }
+
+#win-menu {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+    display: none;
+}
+
+#win-menu h1 {
+    margin: 0 0 20px 0;
+    font-size: 60px;
+    color: #00ff00;
+}
+
+#win-menu button {
+    margin: 10px;
+    padding: 10px 20px;
+    font-family: 'Press Start 2P', cursive;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#lose-menu {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+    display: none;
+}
+
+#lose-menu h1 {
+    margin: 0 0 20px 0;
+    font-size: 60px;
+    color: red;
+}
+
+#lose-menu button {
+    margin: 10px;
+    padding: 10px 20px;
+    font-family: 'Press Start 2P', cursive;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#time-menu {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+    display: none;
+}
+
+#time-menu h1 {
+    margin: 0 0 20px 0;
+    font-size: 60px;
+    color: red;
+}
+
+#time-menu button {
+    margin: 10px;
+    padding: 10px 20px;
+    font-family: 'Press Start 2P', cursive;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
 
 
 

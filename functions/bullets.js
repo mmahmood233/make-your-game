@@ -23,6 +23,7 @@ export function createBullet() {
 }
 
 export function moveBullets() {
+    if (!isGameActive) return; // Do not move bullets if the game is not active
     const bullets = document.querySelectorAll('.bullet');
     const enemyBullets = document.querySelectorAll('.enemy-bullet');
     bullets.forEach(bullet => {

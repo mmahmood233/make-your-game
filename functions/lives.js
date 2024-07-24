@@ -1,6 +1,6 @@
-import { game } from '../game.js';
+import { game, freezeGame } from '../game.js';
 import { createEnemies } from './enemies.js';
-import { timerInterval } from './timer.js';
+import { timerInterval, pauseTimer } from './timer.js';
 
 let lives = 3;
 
@@ -39,27 +39,13 @@ function restartGame() {
 
     // Create new enemies
     createEnemies();
-
-    // Reset player position if needed
-    // resetPlayerPosition();
 }
 
 function gameOver() {
-    console.log('Game Over');
-    // Create and display a game over screen
-    const gameOverElement = document.createElement('div');
-    gameOverElement.id = 'game-over';
-    gameOverElement.textContent = 'GAME OVER';
-    gameOverElement.style.position = 'absolute';
-    gameOverElement.style.top = '50%';
-    gameOverElement.style.left = '50%';
-    gameOverElement.style.transform = 'translate(-50%, -50%)';
-    gameOverElement.style.fontSize = '48px';
-    gameOverElement.style.color = 'red';
-    game.appendChild(gameOverElement);
-
-    // Stop the game loop
-    cancelAnimationFrame(gameLoopId);
+    const loseMenu = document.getElementById('lose-menu');
+    loseMenu.style.display = 'block';
+    freezeGame();
+    pauseTimer();
 }
 
 function updateLivesDisplay() {

@@ -13,6 +13,9 @@ export const player = document.getElementById('player');
 export const enemy = document.getElementById('enemy');
 document.getElementById('resume').addEventListener('click', togglePause);
 document.getElementById('restart').addEventListener('click', restartGame);
+document.getElementById('restart-win').addEventListener('click', restartGame);
+document.getElementById('restart-lose').addEventListener('click', restartGame);
+document.getElementById('restart-time').addEventListener('click', restartGame);
 
 
 export const map = {
@@ -69,6 +72,12 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
+document.addEventListener('keydown', (e) => {
+    if (e.code === 'KeyR') {
+        toggleResume();
+    }
+});
+
 function togglePause() {
     isPaused = !isPaused;
     if (isPaused) {
@@ -79,6 +88,12 @@ function togglePause() {
         lastTime = performance.now(); // Reset lastTime when unpausing
         resumeTimer();
     }
+}
+
+function toggleResume() {
+    isPaused = false;
+    hidePauseMenu();
+    resumeTimer();
 }
 
 function hidePauseMenu() {
@@ -97,4 +112,11 @@ function showPauseMenu() {
 function restartGame() {
     window.location.reload();
 }
+
+export function freezeGame() {
+    isGameActive = false;
+    clearInterval(timerInterval);
+    cancelAnimationFrame(gameLoopId);
+}
+
 
