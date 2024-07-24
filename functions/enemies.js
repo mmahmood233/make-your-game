@@ -1,9 +1,9 @@
 import { game, enemyMap } from '../game.js';
 
-
-
-const enemyWidth = 40;
-const enemyHeight = 30;
+const gameWidth = 1500; // New game width
+const gameHeight = 830; // New game height
+const enemyWidth = 70;
+const enemyHeight = 50;
 const enemyGap = 10;
 let enemyDirection = 1;
 let enemySpeed = 2;
@@ -13,8 +13,8 @@ let isMovingDown = false;
 let dropProgress = 0;
 
 export function createEnemies() {
-    const startX = (800 - (10 * (enemyWidth + enemyGap))) / 2;
-    const startY = 50;  // Adjust this value to position enemies vertically
+    const startX = (gameWidth - (enemyMap[0].length * (enemyWidth + enemyGap))) / 2;
+    const startY = 50;
     enemyMap.forEach((row, rowIndex) => {
         row.forEach((enemy, colIndex) => {
             if (enemy === 1) {
@@ -22,6 +22,8 @@ export function createEnemies() {
                 enemyElement.classList.add('invader');
                 enemyElement.style.left = `${startX + colIndex * (enemyWidth + enemyGap)}px`;
                 enemyElement.style.top = `${startY + rowIndex * (enemyHeight + enemyGap)}px`;
+                enemyElement.style.width = `${enemyWidth}px`;
+                enemyElement.style.height = `${enemyHeight}px`;
                 game.appendChild(enemyElement);
             }
         });
@@ -36,7 +38,7 @@ export function moveEnemies(deltaTime) {
     enemies.forEach((enemy) => {
         const x = parseFloat(enemy.style.left);
         leftmostX = Math.min(leftmostX, x);
-        rightmostX = Math.max(rightmostX, x);
+        rightmostX = Math.max(rightmostX, x + enemyWidth);
     });
 
     if (isMovingDown) {
@@ -46,7 +48,7 @@ export function moveEnemies(deltaTime) {
             dropProgress = 0;
             enemyDirection *= -1;
         }
-    } else if (rightmostX >= 760 || leftmostX <= 0) {
+    } else if (rightmostX >= gameWidth - 10 || leftmostX <= 10) {
         isMovingDown = true;
     }
 

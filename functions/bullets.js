@@ -3,23 +3,30 @@ import { playerX } from './players.js';
 import { increaseScore } from './score.js';
 import { decreaseLives } from './lives.js';
 
+const gameHeight = 830; // New game height
+const bulletSound = new Audio('/shoot.wav');
+const enemyDestroySound = new Audio('/enemyKilled.wav');
 
 export function createBullet() {
     const bullet = document.createElement('div');
     bullet.classList.add('bullet');
-    bullet.style.left = `${playerX + 25}px`; // Center of the player
-    bullet.style.bottom = '50px'; // Just above the player
+    bullet.style.left = `${playerX + 39}px`; // Center of the player
+    bullet.style.bottom = '60px'; // Just above the player
     game.appendChild(bullet);
+
+    // Play bullet sound
+    bulletSound.currentTime = 0;
+    bulletSound.play().catch(error => console.log('Error playing bullet sound:', error));
 }
 
 export function moveBullets() {
     const bullets = document.querySelectorAll('.bullet');
     bullets.forEach(bullet => {
-        const y = parseFloat(bullet.style.bottom) + 3; // Bullet speed
-        if (y > 600) { 
-            bullet.remove();  // Bullet disappears when it goes off the screen 600 is the height of the game area
+        const y = parseFloat(bullet.style.bottom) + 5; // Bullet speed
+        if (y > gameHeight) { 
+            bullet.remove();  // Bullet disappears when it goes off the screen
         } else {
-            bullet.style.bottom = `${y}px`; 
+            bullet.style.bottom = `${y}px`;
             checkBulletCollision(bullet); // Check if bullet collides with enemy
         }
     });
@@ -32,6 +39,10 @@ function checkBulletCollision(bullet) {
             bullet.remove();
             enemy.remove();
             increaseScore(10); // Increase score by 10 for each enemy destroyed
+
+            // Play enemy destroy sound
+            enemyDestroySound.currentTime = 0;
+            enemyDestroySound.play().catch(error => console.log('Error playing enemy destroy sound:', error));
         }
     });
 }
@@ -58,5 +69,3 @@ function isColliding(a, b) {
         aRect.left > bRect.left + bRect.width
     );
 }
-
-

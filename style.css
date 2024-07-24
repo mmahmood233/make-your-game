@@ -1,31 +1,137 @@
 body {
     margin: 0;
     overflow: hidden;
-    background-color: black;
+    background-color: #000033;
     color: white;
-    font-family: Arial, sans-serif;
+    font-family: 'Press Start 2P', cursive;
+    background: url('https://i.imgur.com/yVGxWuF.png') repeat;
+    animation: slide 20s linear infinite;
 }
+
+@keyframes slide {
+    from { background-position: 0 0; }
+    to { background-position: -1000px 0; }
+}
+
 #game {
     position: relative;
-    width: 800px;
-    height: 600px;
-    margin: 0 auto;
-    border: 1px solid white;
+    width: 1500px;
+    height: 830px;
+    margin: 20px auto;
+    border: 3px solid #00ff00;
+    box-shadow: 0 0 20px #00ff00;
+    overflow: hidden;
+    background-image: url('./background.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
+
+/* If you want to keep the scrolling star effect, you can add it as an overlay */
+#game::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('https://i.imgur.com/yVGxWuF.png') repeat;
+    animation: slide 20s linear infinite;
+    opacity: 0.3; /* Adjust this value to blend with your background image */
+    pointer-events: none;
+}
+
+@keyframes slide {
+    from { background-position: 0 0; }
+    to { background-position: -1000px 0; }
+}
+
 .player, .invader, .bullet {
     position: absolute;
-    background-color: white;
 }
+
 .player {
-    width: 50px;
-    height: 30px;
+    width: 80px;
+    height: 60px;
+    position: absolute;
+    background-image: url('./player.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
     bottom: 20px;
 }
+
 .invader {
-    width: 40px;
-    height: 30px;
+    width: 50px;
+    height: 40px;
+    position: absolute;
+    background-image: url('./enemy.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 }
+
+
 .bullet {
     width: 5px;
-    height: 10px;
+    height: 15px;
+    background-color: #ff00ff;
+    box-shadow: 0 0 5px #ff00ff;
 }
+
+#score, #lives, #timer {
+    position: absolute;
+    font-size: 16px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+#score { top: 10px; left: 10px; }
+#lives { top: 10px; right: 10px; }
+#timer { top: 10px; left: 50%; transform: translateX(-50%); }
+
+#game-over, #win-screen {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 48px;
+    text-align: center;
+    text-shadow: 0 0 10px #ff0000;
+}
+
+#pause-menu {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+#pause-menu button {
+    margin: 10px;
+    padding: 10px 20px;
+    font-family: 'Press Start 2P', cursive;
+    background-color: #00ff00;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#game::after {
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    z-index: 2;
+    background-size: 100% 2px, 3px 100%;
+    pointer-events: none;
+}
+

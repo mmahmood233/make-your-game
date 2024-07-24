@@ -4,7 +4,7 @@ import { moveBullets, checkPlayerCollision } from './functions/bullets.js';
 import { initializeScore, checkWinCondition } from './functions/score.js';
 import { initializeLives } from './functions/lives.js';
 import { initializeTimer } from './functions/timer.js';
-
+import { initializePlayerPosition } from './functions/players.js';
 
 
 
@@ -17,12 +17,16 @@ document.getElementById('restart').addEventListener('click', restartGame);
 
 
 export const enemyMap = [
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    // [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    // [, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [, , 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [, , , 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [, , , , 1, 1, 1, 1, 1, 1, 1, 1, 1],
+    [, , , , , 1, 1, 1, 1, 1, 1, 1],
+    [, , , , , , 1, 1, 1, 1, 1],
+    [, , , , , , , 1, 1, 1],
+    [, , , , , , , , 1],
+
 ];
 
 let lastTime = 0;
@@ -48,6 +52,7 @@ initializeScore();
 initializeLives();
 initializeTimer();
 gameLoop();
+initializePlayerPosition();
 
 document.addEventListener('keydown', (e) => {
     if (e.code === 'KeyP') {
