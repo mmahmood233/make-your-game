@@ -1,33 +1,30 @@
-import { game, enemyMap } from '../game.js';
+import { game, map } from '../game.js';
+
 
 const gameWidth = 1500; // New game width
-const gameHeight = 830; // New game height
-const enemyWidth = 70;
-const enemyHeight = 50;
-const enemyGap = 10;
 let enemyDirection = 1;
 let enemySpeed = 2;
-let enemyDropSpeed = 0.1;
-let enemyDropDistance = 20;
-let isMovingDown = false;
-let dropProgress = 0;
 
 export function createEnemies() {
-    const startX = (gameWidth - (enemyMap[0].length * (enemyWidth + enemyGap))) / 2;
+    const enemySize = 50; // Adjust this value as needed
+    const enemyGap = 10;  // Gap between enemies
+    const startX = (game.clientWidth - (map.columns * (enemySize + enemyGap))) / 2;
     const startY = 50;
-    enemyMap.forEach((row, rowIndex) => {
-        row.forEach((enemy, colIndex) => {
-            if (enemy === 1) {
+
+    for (let row = 0; row < map.rows; row++) {
+        for (let col = 0; col < map.columns; col++) {
+            const tileValue = map.getTile(col, row);
+            if (tileValue === 1) {  // Create an enemy only for tiles with value 1
                 const enemyElement = document.createElement('div');
                 enemyElement.classList.add('invader');
-                enemyElement.style.left = `${startX + colIndex * (enemyWidth + enemyGap)}px`;
-                enemyElement.style.top = `${startY + rowIndex * (enemyHeight + enemyGap)}px`;
-                enemyElement.style.width = `${enemyWidth}px`;
-                enemyElement.style.height = `${enemyHeight}px`;
+                enemyElement.style.left = `${startX + col * (enemySize + enemyGap)}px`;
+                enemyElement.style.top = `${startY + row * (enemySize + enemyGap)}px`;
+                enemyElement.style.width = `${enemySize}px`;
+                enemyElement.style.height = `${enemySize}px`;
                 game.appendChild(enemyElement);
             }
-        });
-    });
+        }
+    }
 }
 
 export function moveEnemies(deltaTime) {
@@ -36,49 +33,42 @@ export function moveEnemies(deltaTime) {
     let rightmostX = -Infinity;
 
     enemies.forEach((enemy) => {
-        const x = parseFloat(enemy.style.left);
-        leftmostX = Math.min(leftmostX, x);
-        rightmostX = Math.max(rightmostX, x + enemyWidth);
+        const rect = enemy.getBoundingClientRect();
+        leftmostX = Math.min(leftmostX, rect.left);
+        rightmostX = Math.max(rightmostX, rect.right);
     });
 
-    if (isMovingDown) {
-        dropProgress += enemyDropSpeed * deltaTime;
-        if (dropProgress >= enemyDropDistance) {
-            isMovingDown = false;
-            dropProgress = 0;
-            enemyDirection *= -1;
-        }
-    } else if (rightmostX >= gameWidth - 10 || leftmostX <= 10) {
-        isMovingDown = true;
+    const gameRect = game.getBoundingClientRect();
+
+    if (rightmostX >= gameRect.right || leftmostX <= gameRect.left) {
+        enemyDirection *= -1; // Reverse direction
     }
 
     enemies.forEach((enemy) => {
-        const x = parseFloat(enemy.style.left);
-        const y = parseFloat(enemy.style.top);
-        
-        if (isMovingDown) {
-            enemy.style.top = `${y + enemyDropSpeed * deltaTime}px`;
-        } else {
-            enemy.style.left = `${x + enemySpeed * enemyDirection * deltaTime / 16}px`;
-        }
+        const currentLeft = parseFloat(enemy.style.left);
+        const newLeft = currentLeft + enemySpeed * enemyDirection;
+        enemy.style.left = `${newLeft}px`;
     });
 }
+
 
 export function enemyShoot() {
-    const enemies = document.querySelectorAll('.invader');
-    enemies.forEach(enemy => {
-        if (Math.random() < 0.0005) { // Adjust this value to control frequency
-            createEnemyBullet(enemy);
-        }
-    });
+    if (Math.random() < 0.01) { // Adjust this value to control overall frequency
+        createEnemyBullet();
+    }
 }
 
-function createEnemyBullet(enemy) {
+function createEnemyBullet() {
     const bullet = document.createElement('div');
     bullet.classList.add('enemy-bullet');
-    const enemyRect = enemy.getBoundingClientRect();
-    bullet.style.left = `${enemyRect.left + enemyRect.width / 2 - 2}px`;
+    
+    // Random horizontal position within the game width
+    const randomX = Math.random() * gameWidth;
+    bullet.style.left = `${randomX}px`;
+    
+    // Start from the top of the game area
     bullet.style.top = '0px';
+    
     game.appendChild(bullet);
 }
 

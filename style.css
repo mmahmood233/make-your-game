@@ -62,14 +62,11 @@ body {
 }
 
 .invader {
-    width: 50px;
-    height: 40px;
     position: absolute;
     background-image: url('./enemy.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
-    transform: translateZ(0);
 }
 
 
@@ -138,10 +135,12 @@ body {
 
 .enemy-bullet {
     position: absolute;
-    width: 4px;
-    height: 10px;
+    width: 8px;
+    height: 15px;
     background-color: red;
 }
+
+
 
 
 

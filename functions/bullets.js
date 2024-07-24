@@ -1,4 +1,4 @@
-import { game } from '../game.js';
+import { game, isPaused, isGameActive } from '../game.js';
 import { playerX } from './players.js';
 import { increaseScore } from './score.js';
 import { decreaseLives } from './lives.js';
@@ -9,6 +9,7 @@ const enemyDestroySound = new Audio('/enemyKilled.wav');
 const playerIsDeadSound = new Audio('/playerKilled.wav');
 
 export function createBullet() {
+    if (!isPaused && isGameActive) {
     const bullet = document.createElement('div');
     bullet.classList.add('bullet');
     bullet.style.left = `${playerX + 39}px`; // Center of the player
@@ -18,6 +19,7 @@ export function createBullet() {
     // Play bullet sound
     bulletSound.currentTime = 0;
     bulletSound.play().catch(error => console.log('Error playing bullet sound:', error));
+    }
 }
 
 export function moveBullets() {
@@ -33,7 +35,7 @@ export function moveBullets() {
         }
     });
     enemyBullets.forEach(bullet => {
-        const y = parseFloat(bullet.style.top) + 2; // Adjust speed as needed
+        const y = parseFloat(bullet.style.top) + 1; // Adjust speed as needed
         if (y > gameHeight) {
             bullet.remove();
         } else {

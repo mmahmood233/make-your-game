@@ -15,25 +15,34 @@ document.getElementById('resume').addEventListener('click', togglePause);
 document.getElementById('restart').addEventListener('click', restartGame);
 
 
-export const enemyMap = [
-    // [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    // [, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [, , 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [, , , 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [, , , , 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    [, , , , , 1, 1, 1, 1, 1, 1, 1],
-    [, , , , , , 1, 1, 1, 1, 1],
-    [, , , , , , , 1, 1, 1],
-    [, , , , , , , , 1],
-
-];
+export const map = {
+    columns: 21,
+    rows: 10,
+    size: 25,
+    tiles: [
+        // 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0,
+        // 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0,
+        // 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0,
+        0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    ],
+    getTile: function(col, row) {
+        return this.tiles[row * this.columns + col];
+    }
+};
 
 let lastTime = 0;
 export let gameLoopId
-let isPaused = false;
+export let isPaused = false;
+export let isGameActive = true;
 
 function gameLoop(currentTime) {
-    if (!isPaused) {
+    if (!isPaused && isGameActive) {
         if (!lastTime) lastTime = currentTime;
         const deltaTime = currentTime - lastTime;
         updatePlayerPosition();
