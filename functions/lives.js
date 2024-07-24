@@ -1,5 +1,6 @@
 import { game } from '../game.js';
 import { createEnemies } from './enemies.js';
+import { timerInterval } from './timer.js';
 
 let lives = 3;
 
@@ -12,6 +13,7 @@ export function decreaseLives() {
     lives--; // Decrease the number of lives
     updateLivesDisplay(); // Update the lives display
     if (lives <= 0) {
+        clearInterval(timerInterval);
         gameOver();
     } else {
         restartGame();

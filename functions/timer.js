@@ -1,7 +1,7 @@
 import { game, gameLoopId } from '../game.js';
 
 let timeRemaining = 60; 
-let timerInterval;
+export let timerInterval;
 
 export function initializeTimer() {
     timeRemaining = 60;
