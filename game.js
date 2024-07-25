@@ -69,11 +69,7 @@ initializePlayerPosition();
 document.addEventListener('keydown', (e) => {
     if (e.code === 'KeyP') {
         togglePause();
-    }
-});
-
-document.addEventListener('keydown', (e) => {
-    if (e.code === 'KeyR') {
+    } else if (e.code === 'KeyR' && isPaused) {
         toggleResume();
     }
 });
