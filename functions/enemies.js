@@ -53,7 +53,7 @@ export function moveEnemies(deltaTime) {
 
 
 export function enemyShoot() {
-    if (Math.random() < 0.01) { // Adjust this value to control overall frequency
+    if (Math.random() < 0.035) { // Adjust this value to control overall frequency
         createEnemyBullet();
     }
 }

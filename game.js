@@ -3,7 +3,7 @@ import { createEnemies, moveEnemies, enemyShoot } from './functions/enemies.js';
 import { moveBullets, checkPlayerCollision } from './functions/bullets.js';
 import { initializeScore, checkWinCondition } from './functions/score.js';
 import { initializeLives } from './functions/lives.js';
-import { initializeTimer, pauseTimer, resumeTimer } from './functions/timer.js';
+import { initializeTimer, pauseTimer, resumeTimer, timerInterval } from './functions/timer.js';
 import { initializePlayerPosition } from './functions/players.js';
 
 
@@ -69,8 +69,14 @@ initializePlayerPosition();
 document.addEventListener('keydown', (e) => {
     if (e.code === 'KeyP' && isGameActive) {
         togglePause();
-    } else if (e.code === 'KeyR' && isPaused) {
-        toggleResume();
+    } else if (e.code === 'KeyR') {
+        if (document.getElementById('win-menu').style.display === 'block' ||
+            document.getElementById('lose-menu').style.display === 'block' ||
+            document.getElementById('time-menu').style.display === 'block') {
+            restartGame();
+        } else if (e.code === 'KeyR' && isPaused) {
+            restartGame();
+        }
     }
 });
 

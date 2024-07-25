@@ -4,9 +4,9 @@ import { increaseScore } from './score.js';
 import { decreaseLives } from './lives.js';
 
 const gameHeight = 830; // New game height
-const bulletSound = new Audio('/shoot.wav');
-const enemyDestroySound = new Audio('/enemyKilled.wav');
-const playerIsDeadSound = new Audio('/playerKilled.wav');
+const bulletSound = new Audio('sounds/shoot.wav');
+const enemyDestroySound = new Audio('sounds/enemyKilled.wav');
+const playerIsDeadSound = new Audio('sounds/playerKilled.wav');
 
 export function createBullet() {
     if (!isPaused && isGameActive) {
@@ -27,7 +27,7 @@ export function moveBullets() {
     const bullets = document.querySelectorAll('.bullet');
     const enemyBullets = document.querySelectorAll('.enemy-bullet');
     bullets.forEach(bullet => {
-        const y = parseFloat(bullet.style.bottom) + 5; // Bullet speed
+        const y = parseFloat(bullet.style.bottom) + 3.5; // Bullet speed
         if (y > gameHeight) { 
             bullet.remove();  // Bullet disappears when it goes off the screen
         } else {
@@ -36,7 +36,7 @@ export function moveBullets() {
         }
     });
     enemyBullets.forEach(bullet => {
-        const y = parseFloat(bullet.style.top) + 1; // Adjust speed as needed
+        const y = parseFloat(bullet.style.top) + 10; // Adjust speed as needed
         if (y > gameHeight) {
             bullet.remove();
         } else {

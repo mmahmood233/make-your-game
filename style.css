@@ -1,11 +1,11 @@
 body {
     margin: 0;
     overflow: hidden;
-    background-color: #000033;
     color: white;
     font-family: 'Press Start 2P', cursive;
     background: url('https://i.imgur.com/yVGxWuF.png') repeat;
     animation: slide 20s linear infinite;
+    background-color: #000033;
 }
 
 @keyframes slide {
@@ -21,7 +21,7 @@ body {
     border: 3px solid #00ff00;
     box-shadow: 0 0 20px #00ff00;
     overflow: hidden;
-    background-image: url('./background.png');
+    background-image: url('images/background.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -54,7 +54,7 @@ body {
     width: 80px;
     height: 60px;
     position: absolute;
-    background-image: url('./player.png');
+    background-image: url('images/player.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -63,7 +63,7 @@ body {
 
 .invader {
     position: absolute;
-    background-image: url('./enemy.png');
+    background-image: url('images/enemy.png');
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -217,6 +217,7 @@ body {
     padding: 20px;
     border-radius: 10px;
     display: none;
+    z-index: 1000;
 }
 
 #time-menu h1 {
