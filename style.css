@@ -106,6 +106,7 @@ body {
     padding: 20px;
     border-radius: 10px;
     text-align: center;
+    z-index: 1000;
 }
 
 #pause-menu h1 {
@@ -156,6 +157,7 @@ body {
     padding: 20px;
     border-radius: 10px;
     display: none;
+    z-index: 1000;
 }
 
 #win-menu h1 {
@@ -185,6 +187,7 @@ body {
     padding: 20px;
     border-radius: 10px;
     display: none;
+    z-index: 1000;
 }
 
 #lose-menu h1 {

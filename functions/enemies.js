@@ -6,8 +6,8 @@ let enemyDirection = 1;
 let enemySpeed = 2;
 
 export function createEnemies() {
-    const enemySize = 50; // Adjust this value as needed
-    const enemyGap = 10;  // Gap between enemies
+    const enemySize = 55; // Adjust this value as needed
+    const enemyGap = 15;  // Gap between enemies
     const startX = (game.clientWidth - (map.columns * (enemySize + enemyGap))) / 2;
     const startY = 50;
 
