@@ -67,7 +67,7 @@ gameLoop();
 initializePlayerPosition();
 
 document.addEventListener('keydown', (e) => {
-    if (e.code === 'KeyP') {
+    if (e.code === 'KeyP' && isGameActive) {
         togglePause();
     } else if (e.code === 'KeyR' && isPaused) {
         toggleResume();
